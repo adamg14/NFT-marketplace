@@ -2,7 +2,7 @@
 pragma solidity ^0.8.8;
 
 contract HelloWorld{
-    function helloworld() public pure returns(string memory){
-        return "Hello World from the ETH smart contract";
+    function sendFunds(address payable recipient) external payable{
+        recipient.transfer(msg.value);
     }
 }
