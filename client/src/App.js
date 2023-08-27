@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Heading from "./components/Heading";
-import HelloWorldButton from './components/HelloWorldButton';
+import CryptoPrice from './components/CryptoPrice';
 import SendFunds from './components/SendFunds';
 import React, { useState } from 'react';
 import axios from "axios";
@@ -19,6 +19,7 @@ function App() {
   return (
     <div className="App">
       <Heading></Heading>
+      <CryptoPrice></CryptoPrice>
       <button onClick={ handleClick }>Hello World - Smart Contract Function</button>
       <p>{ result }</p>
       <SendFunds></SendFunds>
