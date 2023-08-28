@@ -6,8 +6,8 @@ require("dotenv").config();
 async function deploySmartContract(){
     const provider = new ethers.JsonRpcProvider(process.env.RPC_URL);
     const wallet = new ethers.Wallet(process.env.WALLET_PRIVATE_KEY, provider);
-    const abi = fs.readFileSync(path.join(__dirname, "HelloWorld_sol_HelloWorld.abi"), "utf8");
-    const binary = fs.readFileSync(path.join(__dirname, "HelloWorld_sol_HelloWorld.bin"), "utf8");
+    const abi = fs.readFileSync(path.join(__dirname, "NFTMarketplace_sol_NFTMarketplace.abi"), "utf8");
+    const binary = fs.readFileSync(path.join(__dirname, "NFTMarketplace_sol_NFTMarketplace.bin"), "utf8");
     const contractFactory = new ethers.ContractFactory(abi, binary, wallet);
     console.log("Deploying the smart contract  to the blockchain...");
     const contract = await contractFactory.deploy();

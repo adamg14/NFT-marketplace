@@ -3,8 +3,10 @@ import './App.css';
 import Heading from "./components/Heading";
 import CryptoPrice from './components/CryptoPrice';
 import SendFunds from './components/SendFunds';
+import MintNFT from './components/MintNFT';
 import React, { useState } from 'react';
 import axios from "axios";
+import NFTListings from './components/NFTListings';
 
 function App() {
   const [result, setResult] = useState();
@@ -20,6 +22,8 @@ function App() {
     <div className="App">
       <Heading></Heading>
       <CryptoPrice></CryptoPrice>
+      <NFTListings></NFTListings>
+      <MintNFT></MintNFT>
       <button onClick={ handleClick }>Hello World - Smart Contract Function</button>
       <p>{ result }</p>
       <SendFunds></SendFunds>

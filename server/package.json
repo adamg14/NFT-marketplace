@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "yarn solcjs --bin --abi --include-path node_modules/ --base-path . -o . HelloWorld.sol"
+    "compile": "yarn solcjs --bin --abi --include-path node_modules/ --base-path . -o . NFTMarketplace.sol"
   },
   "author": "",
   "license": "ISC",
