@@ -8,20 +8,33 @@ function MintNFT(){
     let NFTImageURLInput;
     let NFTPriceInput;
 
+    const [NFTName, setNFTName] = useState();
+    const [NFTDescription, setNFTDescription] = useState();
+    const [NFTImageURL, setNFTImageURL] = useState();
+    const [NFTPrice, setNFTPrice] = useState();
+
+    function handleDescriptionInput(event){
+        setNFTDescription(event.target.value);
+    }
+
+    function handleChange(){
+
+    }
     async function handleClick(){
+        console.log("this should be the description " + NFTDescription);
         if (window.ethereum){
             await window.ethereum.enable();
             const provider = new ethers.BrowserProvider(window.ethereum);
             const signer = await provider.getSigner();
             const userAddress = await signer.getAddress();
-            const contractAddress = "0xe2aC15B10DDa50675dA6B3fA7DEbB05164c92838";
+            const contractAddress = "0xd9a9F8486293B9E21c52c5026c970444E91e2140";
 
-            const contractABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"NFTs","outputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"address","name":"NFTOwner","type":"address"},{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"description","type":"string"},{"internalType":"string","name":"imageURL","type":"string"},{"internalType":"uint256","name":"price","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address payable","name":"_NFTOwner","type":"address"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_description","type":"string"},{"internalType":"string","name":"_imageURL","type":"string"},{"internalType":"uint256","name":"_price","type":"uint256"}],"name":"mintNFT","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+            const contractABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"NFTs","outputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"address","name":"NFTOwner","type":"address"},{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"description","type":"string"},{"internalType":"string","name":"imageURL","type":"string"},{"internalType":"string","name":"price","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"listedNFTs","outputs":[{"components":[{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"address","name":"NFTOwner","type":"address"},{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"description","type":"string"},{"internalType":"string","name":"imageURL","type":"string"},{"internalType":"string","name":"price","type":"string"}],"internalType":"struct NFTMarketplace.NFT[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address payable","name":"_NFTOwner","type":"address"},{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_description","type":"string"},{"internalType":"string","name":"_imageURL","type":"string"},{"internalType":"string","name":"_price","type":"string"}],"name":"mintNFT","outputs":[],"stateMutability":"nonpayable","type":"function"}];
 
             // create an instance of the contract
             const contract = new ethers.Contract(contractAddress, contractABI, signer);
 
-            const transaction = await contract.mintNFT(userAddress, "W11", "Trip to London.", "https://res-console.cloudinary.com/dewruj06n/thumbnails/v1/image/upload/v1693066311/dm56NGhtb3Y2YmZwZG1oanZtcmk=/preview", "500000000000000000");
+            const transaction = await contract.mintNFT(userAddress, NFTName, NFTDescription, NFTImageURL, NFTPrice);
         }
     }
 
@@ -29,13 +42,13 @@ function MintNFT(){
         <div>
             <h1>Mint NFT</h1>
             {/* dont need to input the owners address, this will be retrieved from the msg.sender property */}
-            <input type="text" value={ NFTNameInput } id="NFTNameInput" name="NFTNameInput" placeholder="Name"/>
+            <input type="text" value={ NFTNameInput } id="NFTNameInput" name="NFTNameInput" placeholder="Name" onChange={ handleChange }/>
             <br />
-            <input type="text" value={ NFTDescriptionInput } id="NFTDescriptionInput" name="NFTDescriptionInput" placeholder="Description"/>
+            <input type="text" value={ NFTDescription } id="NFTDescriptionInput" name="NFTDescriptionInput" placeholder="Description" onChange={ handleDescriptionInput }/>
             <br />
-            <input type="text" value={ NFTImageURLInput } id="NFTImageURLInput" name="NFTDescriptionInput" placeholder="Public Image URL"/>
+            <input type="text" value={ NFTImageURLInput } id="NFTImageURLInput" name="NFTDescriptionInput" placeholder="Public Image URL" onChange={ handleChange }/>
             <br />
-            <input type="number" min="1" value={ NFTPriceInput } id="NFTPriceInput" name="NFTPriceInput" placeholder="Price (Ethers)"/>
+            <input type="number" min="1" value={ NFTPriceInput } id="NFTPriceInput" name="NFTPriceInput" placeholder="Price (Ethers)" onChange={ handleChange }/>
             <br />
             <button onClick={ handleClick }>Mint NFT</button>
         </div>

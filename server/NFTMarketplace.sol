@@ -21,12 +21,12 @@ contract NFTMarketplace{
         string name;
         string description;
         string imageURL;
-        // price in wei
-        uint256 price;
+        // price in wei - REMEMBER TO REFORMAT THIS WHEN USING THIS AS A UNIT OF VALUE - CANNOT STORE AS A UINT256 BECAUSE JS DOESNT WORK WELL WITH BIG INTS
+        string price;
     }
 
     // only the owner should be able to do this - add the onlyOwner modifier
-    function mintNFT(address payable _NFTOwner, string memory _name, string memory _description, string memory _imageURL, uint256 _price) public isOwner{
+    function mintNFT(address payable _NFTOwner, string memory _name, string memory _description, string memory _imageURL, string memory _price) public isOwner{
         // increment the tokenIdGenerator
         NFT memory mintedNFT = NFT({
             tokenId: tokenIdGenerator,
@@ -38,5 +38,9 @@ contract NFTMarketplace{
         });
         tokenIdGenerator += 1;
         NFTs.push(mintedNFT);
+    }
+
+    function listedNFTs() public view returns(NFT[] memory){
+        return NFTs;
     }
 }

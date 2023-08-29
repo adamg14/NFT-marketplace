@@ -19,11 +19,16 @@ app.use(bodyParser.json());
 //support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.get("/", async function(req, res){
-//     const result = await HelloWorld();
-//     console.log(result);
-//     res.send(result);
-// });
+async function getNFTListings(){
+    // create a contract interface
+    const provider = new ethers.JsonRpcProvider(process.env.RPC_URL);
+    const contractABI = fs.readFileSync(path.join(__dirname, "NFTMarketplace_sol_NFTMarketplace.abi"), "utf8");
+    const contractAddress = "0xd9a9F8486293B9E21c52c5026c970444E91e2140";
+
+    const contract = new ethers.Contract(contractAddress, contractABI, provider);
+    const NFTListing = await contract.listedNFTs();
+    return NFTListing;
+}
 
 app.get("/crypto-price", async function(req, res){
     const response = await axios.get("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest", {
@@ -41,9 +46,21 @@ app.get("/crypto-price", async function(req, res){
     res.send([BTCPrice, ETHPrice]);
 });
 
-app.post("/mint-nft", function(req, res){
-    console.log("hello world");
-    console.log(req.body);
+app.get("/nft-listings", async function(req, res){
+    const NFTListingResult = await getNFTListings();
+
+    for(let i = 0; i < NFTListingResult.length; i++){
+        NFTListingResult[i].price = NFTListingResult[i].price.toString();
+    }
+
+    const jsonString = JSON.stringify(NFTListingResult, function(key, value){
+        if (typeof value === 'bigint') {
+          return value.toString();
+        }else{
+            return value;
+        }
+    });
+    res.send(jsonString);
 });
 
 app.listen(PORT, function(){
