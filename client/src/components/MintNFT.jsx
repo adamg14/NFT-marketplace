@@ -3,23 +3,28 @@ import Axios from "axios";
 import { ethers } from "ethers";
 
 function MintNFT(){
-    let NFTNameInput;
-    let NFTDescriptionInput;
-    let NFTImageURLInput;
-    let NFTPriceInput;
-
     const [NFTName, setNFTName] = useState();
     const [NFTDescription, setNFTDescription] = useState();
     const [NFTImageURL, setNFTImageURL] = useState();
     const [NFTPrice, setNFTPrice] = useState();
 
+    function handleNameInput(event){
+        setNFTName(event.target.value);
+    }
+
     function handleDescriptionInput(event){
         setNFTDescription(event.target.value);
     }
 
-    function handleChange(){
-
+    function handleImageURLInput(event){
+        setNFTImageURL(event.target.value);
     }
+
+    function handleNFTPriceInput(event){
+        setNFTPrice(event.target.value);
+    }
+
+
     async function handleClick(){
         console.log("this should be the description " + NFTDescription);
         if (window.ethereum){
@@ -42,13 +47,13 @@ function MintNFT(){
         <div>
             <h1>Mint NFT</h1>
             {/* dont need to input the owners address, this will be retrieved from the msg.sender property */}
-            <input type="text" value={ NFTNameInput } id="NFTNameInput" name="NFTNameInput" placeholder="Name" onChange={ handleChange }/>
+            <input type="text" value={ NFTName } id="NFTNameInput" name="NFTNameInput" placeholder="Name" onChange={ handleNameInput }/>
             <br />
             <input type="text" value={ NFTDescription } id="NFTDescriptionInput" name="NFTDescriptionInput" placeholder="Description" onChange={ handleDescriptionInput }/>
             <br />
-            <input type="text" value={ NFTImageURLInput } id="NFTImageURLInput" name="NFTDescriptionInput" placeholder="Public Image URL" onChange={ handleChange }/>
+            <input type="text" value={ NFTImageURL } id="NFTImageURLInput" name="NFTDescriptionInput" placeholder="Public Image URL" onChange={ handleImageURLInput }/>
             <br />
-            <input type="number" min="1" value={ NFTPriceInput } id="NFTPriceInput" name="NFTPriceInput" placeholder="Price (Ethers)" onChange={ handleChange }/>
+            <input type="number" min="1" value={ NFTPrice } id="NFTPriceInput" name="NFTPriceInput" placeholder="Price (Ethers)" onChange={ handleNFTPriceInput }/>
             <br />
             <button onClick={ handleClick }>Mint NFT</button>
         </div>
