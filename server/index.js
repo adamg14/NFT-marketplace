@@ -20,10 +20,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 async function getNFTListings(){
+    console.log("this function has been called");
     // create a contract interface
     const provider = new ethers.JsonRpcProvider(process.env.RPC_URL);
     const contractABI = fs.readFileSync(path.join(__dirname, "NFTMarketplace_sol_NFTMarketplace.abi"), "utf8");
-    const contractAddress = "0xd9a9F8486293B9E21c52c5026c970444E91e2140";
+    const contractAddress = "0x616E951440Ad0d2163ca4Bcb76C6418E670b8d51";
 
     const contract = new ethers.Contract(contractAddress, contractABI, provider);
     const NFTListing = await contract.listedNFTs();

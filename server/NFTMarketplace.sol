@@ -43,4 +43,21 @@ contract NFTMarketplace{
     function listedNFTs() public view returns(NFT[] memory){
         return NFTs;
     }
+
+    function buyNFT(uint256 _tokenId) public payable{
+        NFT memory selectedNFT;
+        for(uint256 i = 0; i < NFTs.length; i++){
+            if (NFTs[i].tokenId == _tokenId){
+                selectedNFT = NFTs[i];
+            }
+        }
+        
+        payable(selectedNFT.NFTOwner).transfer(msg.value);
+
+        // change the owner of the NFT now that it has been bought
+        selectedNFT.NFTOwner = msg.sender;
+    }
+
+
+    // EDIT NFT function
 }
