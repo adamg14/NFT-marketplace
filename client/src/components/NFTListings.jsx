@@ -36,7 +36,7 @@ function NFTListings(){
             // create an instance of the contract
             const contract = new ethers.Contract(contractAddress, contractABI, signer);
 
-            // const transaction = await contract.buyNFT(event.target.value[0], {value: priceWEI});
+            const transaction = await contract.buyNFT(event.target.value[0], {value: valueInWei});
         }        
     }
     return(
@@ -51,7 +51,7 @@ function NFTListings(){
                         <p>Current Owner ETH Address: { NFT[1] }</p>
                         <img src={ NFT[4] } alt="" width="100" height="100"/>
                         <p>Description: { NFT[3] }</p>
-                        <button value={NFT} onClick={ handleButtonClick }>Purchase NFT for { NFT[5] } ETH </button>
+                        <button value={NFT} onClick={ handleButtonClick } className="btn btn-success nft-button">Purchase NFT for { NFT[5] } ETH </button>
                         <hr />
                     </div>
                 ))

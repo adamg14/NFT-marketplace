@@ -1,0 +1,41 @@
+body{
+    background-color: black;
+    color: #00FF41;
+}
+
+h1{
+    font-family: 'Share Tech', sans-serif;
+}
+
+a{
+    font-family: 'Share Tech', sans-serif;
+    color: #00FF41;
+}
+
+.navbar-brand:hover{
+    color: #00FF41;
+}
+
+.nft-button{
+    background-color: #00FF41;
+    color: black;
+    font-weight: bold;
+}
+
+.nft-button:hover{
+    background-color: #00FF41;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #008F11;
+}
+
+.nav-item{
+    padding-right: 5%;
+}
+
+input{
+    background-color: #00FF41;
+    color: black;
+}

@@ -59,5 +59,5 @@ contract NFTMarketplace{
     }
 
 
-    // EDIT NFT function
+    // add EDIT NFT function
 }

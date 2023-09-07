@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
 import { ethers } from "ethers";
+import NavigationBar from "./NavigationBar";
 
 function MintNFT(){
     const [NFTName, setNFTName] = useState();
@@ -55,7 +56,7 @@ function MintNFT(){
             <br />
             <input type="number" min="1" value={ NFTPrice } id="NFTPriceInput" name="NFTPriceInput" placeholder="Price (Ethers)" onChange={ handleNFTPriceInput }/>
             <br />
-            <button onClick={ handleClick }>Mint NFT</button>
+            <button onClick={ handleClick } className="btn btn-success nft-button">Mint NFT</button>
         </div>
     );
 }
